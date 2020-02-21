@@ -1,4 +1,4 @@
-package com.example.whereismycar;
+package com.bignerdranch.android.findmycar;
 
 import org.junit.Test;
 
