@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
@@ -21,15 +20,14 @@ public class RecordingFragment extends Fragment {
 
     private static final String TAG = "RecordingFragment";
 
-    private Parking mCrime;
+    private Parking mParking;
     private EditText mTitleField;
     private Button mDateButton;
-    private CheckBox mSolvedCheckBox;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mCrime = new Parking();
+        mParking = new Parking();
     }
 
     @Override
@@ -43,20 +41,21 @@ public class RecordingFragment extends Fragment {
             @Override
             public void beforeTextChanged(
                     CharSequence s, int start, int count, int after) {
-// This space intentionally left blank
+                    // This space intentionally left blank
             }
             @Override
             public void onTextChanged(
                     CharSequence s, int start, int before, int count) {
-                mCrime.setNote(s.toString());
+                    mParking.setNote(s.toString());
             }
             @Override
             public void afterTextChanged(Editable s) {
-// This one too
+                // This one too
             }
         });
 
         mDateButton = (Button) v.findViewById(R.id.parking_picture);
+        mDateButton.setText(mParking.getDate().toString());
         mDateButton.setEnabled(false);
 
 
