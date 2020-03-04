@@ -31,10 +31,4 @@ public class Parking {
     public void setDate (Date date) {
         mDate = date;
     }
-    public boolean isSolved() {
-        return mSolved;
-    }
-    public void setSolved (boolean solved) {
-        mSolved = solved;
-    }
 }

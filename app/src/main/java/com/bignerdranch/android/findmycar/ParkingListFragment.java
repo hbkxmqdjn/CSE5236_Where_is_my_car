@@ -44,12 +44,12 @@ public class ParkingListFragment extends Fragment {
                 super(inflater.inflate(R.layout.list_item_parking, parent, false));
                 itemView.setOnClickListener(this);
                 mNoteTextView = (TextView) itemView.findViewById(R.id.parking_note);
-                mDateTextView = (TextView) itemView.findViewById(R.id.parking_picture);
+                mDateTextView = (TextView) itemView.findViewById(R.id.parking_date);
             }
             public void bind (Parking parking){
                 mParking = parking;
                 mNoteTextView.setText(mParking.getNote());
-                mDateTextView.setText(mParking.getDate().toString());
+                mDateTextView.setText("date");
             }
             @Override
             public void onClick (View view){

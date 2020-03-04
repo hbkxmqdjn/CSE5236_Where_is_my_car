@@ -21,10 +21,11 @@ public class ParkingLab {
 
     private ParkingLab(Context context){
         mParkings = new ArrayList<>();
+        Date date = new Date();
         for(int i = 0;i<100;i++){
             Parking parking = new Parking();
             parking.setNote("Parking#"+i);
-            parking.setDate(new Date());
+            parking.setDate(date);
             mParkings.add(parking);
         }
     }
