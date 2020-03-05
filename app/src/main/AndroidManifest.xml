@@ -16,8 +16,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.SettingActivity" />
-        <activity android:name=".ui.HistoryActivity" />
-        <activity android:name=".ui.ParkingActivity">
+        <activity android:name=".ui.ParkingActivity" />
+        <activity android:name=".ui.ParkingListActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
