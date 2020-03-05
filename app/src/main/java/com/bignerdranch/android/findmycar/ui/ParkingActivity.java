@@ -9,27 +9,13 @@ import android.util.Log;
 
 import com.bignerdranch.android.findmycar.R;
 
-public class ParkingActivity extends AppCompatActivity {
+public class ParkingActivity extends SingleFragmentActivity {
 
     private static final String TAG = "ParkingActivity";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_parking);
-        Log.d(TAG, "onCreate(Bundle) called");
-
-
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragment_container);
-        if (fragment == null) {
-            fragment = new RecordingFragment();
-            fm.beginTransaction()
-                    .add(R.id.fragment_container, fragment)
-                    .commit();
-        }
-
-
+    protected Fragment createFragment() {
+        return new RecordingFragment();
     }
 
     @Override

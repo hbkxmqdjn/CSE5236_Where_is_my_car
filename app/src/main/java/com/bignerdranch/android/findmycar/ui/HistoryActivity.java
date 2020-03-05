@@ -1,16 +1,17 @@
 package com.bignerdranch.android.findmycar.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 
 import com.bignerdranch.android.findmycar.R;
 
-public class HistoryActivity extends AppCompatActivity {
+public class HistoryActivity extends SingleFragmentActivity {
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_history);
+    protected Fragment createFragment() {
+        return new ParkingListFragment();
     }
 }
