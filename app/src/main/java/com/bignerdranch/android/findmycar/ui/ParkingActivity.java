@@ -8,12 +8,14 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.bignerdranch.android.findmycar.R;
+import com.bignerdranch.android.findmycar.SingleFragmentActivity;
 
 public class ParkingActivity extends SingleFragmentActivity {
 
     private static final String TAG = "ParkingActivity";
 
     @Override
+
     protected Fragment createFragment() {
         return new RecordingFragment();
     }
