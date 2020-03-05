@@ -17,10 +17,12 @@ public class ParkingLab {
         }
         return sParkingLab;
     }
+
     private ParkingLab(Context context) {
         mParkings = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
             Parking parking = new Parking();
+            parking.setNote("Parking #" + i);
             mParkings.add(parking);
         }
     }
