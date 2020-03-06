@@ -17,8 +17,6 @@ public class Parking {
         mLocation = new Location("");
     }
 
-
-
     public UUID getId() {
         return mId;
     }

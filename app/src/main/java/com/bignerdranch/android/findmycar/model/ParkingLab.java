@@ -1,6 +1,9 @@
 package com.bignerdranch.android.findmycar.model;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.bignerdranch.android.findmycar.database.ParkingBaseHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +11,8 @@ import java.util.UUID;
 
 public class ParkingLab {
     private static ParkingLab sParkingLab;
-    private List<Parking> mParkings;
-
+    private Context mContext;
+    private SQLiteDatabase mDatabase;
 
     public static ParkingLab get(Context context) {
         if (sParkingLab == null) {
@@ -19,24 +22,16 @@ public class ParkingLab {
     }
 
     private ParkingLab(Context context) {
-        mParkings = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            Parking parking = new Parking();
-            parking.setNote("Parking #" + i);
-            mParkings.add(parking);
-        }
+        mContext = context.getApplicationContext();
+        mDatabase = new ParkingBaseHelper(mContext)
+                .getWritableDatabase();
     }
 
     public List<Parking> getParkings() {
-        return mParkings;
+        return new ArrayList<>();
     }
     
     public Parking getParking(UUID id) {
-        for (Parking parking : mParkings) {
-            if (parking.getId().equals(id)) {
-                return parking;
-            }
-        }
         return null;
     }
 }
