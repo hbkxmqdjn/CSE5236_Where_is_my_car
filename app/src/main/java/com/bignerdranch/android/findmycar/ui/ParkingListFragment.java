@@ -19,12 +19,8 @@ import java.util.List;
 
 public class ParkingListFragment extends Fragment {
 
-
-
     private RecyclerView mParkingRecyclerView;
     private ParkingAdapter mAdapter;
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,15 +66,12 @@ public class ParkingListFragment extends Fragment {
                     .show();
         }
     }
-    
-
 
     private class ParkingAdapter extends RecyclerView.Adapter<ParkingHolder> {
         private List<Parking> mParkings;
         public ParkingAdapter(List<Parking> parkings) {
             mParkings = parkings;
         }
-
 
         @Override
         public ParkingHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -95,6 +88,4 @@ public class ParkingListFragment extends Fragment {
             return mParkings.size();
         }
     }
-    
-    
 }

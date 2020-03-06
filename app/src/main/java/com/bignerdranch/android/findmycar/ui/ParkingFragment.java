@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment;
 import com.bignerdranch.android.findmycar.R;
 import com.bignerdranch.android.findmycar.model.Parking;
 
-public class RecordingFragment extends Fragment {
+public class ParkingFragment extends Fragment {
 
     private static final String TAG = "RecordingFragment";
 
@@ -58,7 +58,6 @@ public class RecordingFragment extends Fragment {
 
         mDateButton = (Button) v.findViewById(R.id.parking_picture);
         mDateButton.setEnabled(false);
-
 
         return v;
     }
