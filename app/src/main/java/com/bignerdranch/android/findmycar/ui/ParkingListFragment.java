@@ -87,5 +87,9 @@ public class ParkingListFragment extends Fragment {
         public int getItemCount() {
             return mParkings.size();
         }
+
+        public void setParkings(List<Parking> parkings) {
+            mParkings = parkings;
+        }
     }
 }

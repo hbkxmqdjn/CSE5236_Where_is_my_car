@@ -12,9 +12,12 @@ public class Parking {
     private Location mLocation;
 
     public Parking() {
-        mId = UUID.randomUUID();
+        this(UUID.randomUUID());
+    }
+
+    public Parking(UUID id) {
+        mId = id;
         mDate = new Date();
-        mLocation = new Location("");
     }
 
     public UUID getId() {
@@ -32,9 +35,9 @@ public class Parking {
     public void setDate (Date date) {
         mDate = date;
     }
-    public void setLocation(double lon, double lat) {
-        mLocation.setLatitude(lat);
-        mLocation.setLongitude(lon);
+    public void setLocation(Location location) {
+        mLocation.setLatitude(location.getLatitude());
+        mLocation.setLongitude(location.getLongitude());
     }
     public Location getLocation() {
         return mLocation;
