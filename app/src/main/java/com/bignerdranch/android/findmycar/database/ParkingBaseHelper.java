@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.bignerdranch.android.findmycar.database.ParkingDbSchema;
+import com.bignerdranch.android.findmycar.database.ParkingDbSchema.*;
 
 public class ParkingBaseHelper extends SQLiteOpenHelper {
     private static final int VERSION = 1;
@@ -19,10 +19,10 @@ public class ParkingBaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " + ParkingDbSchema.ParkingTable.NAME + '(' +
                 " _id integer primary key autoincrement, " +
-                ParkingDbSchema.Cols.UUID + ", " +
-                ParkingDbSchema.Cols.NOTE + ", " +
-                ParkingDbSchema.Cols.DATE +  ", " +
-                ParkingDbSchema.Cols.LOCATION + ")"
+                ParkingTable.Cols.UUID + ", " +
+                ParkingTable.Cols.NOTE + ", " +
+                ParkingTable.Cols.DATE +  ", " +
+                ParkingTable.Cols.LOCATION + ")"
         );
     }
 

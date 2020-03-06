@@ -16,12 +16,17 @@ import androidx.fragment.app.Fragment;
 
 import com.bignerdranch.android.findmycar.R;
 import com.bignerdranch.android.findmycar.model.Parking;
+import com.bignerdranch.android.findmycar.model.ParkingLab;
 
-public class RecordingFragment extends Fragment {
+
+import java.util.UUID;
+
+public class ParkingFragment extends Fragment {
 
     private static final String TAG = "RecordingFragment";
+    private static final String ARG_PARKING_ID = "parking_id";
 
-    private Parking mCrime;
+    private Parking mParking;
     private EditText mTitleField;
     private Button mDateButton;
     private CheckBox mSolvedCheckBox;
@@ -29,7 +34,16 @@ public class RecordingFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mCrime = new Parking();
+        UUID parkingId = (UUID) getArguments().getSerializable(ARG_PARKING_ID);
+        mParking = ParkingLab.get(getActivity()).getParking(parkingId);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        ParkingLab.get(getActivity())
+                .updateParking(mParking);
     }
 
     @Override
@@ -48,7 +62,7 @@ public class RecordingFragment extends Fragment {
             @Override
             public void onTextChanged(
                     CharSequence s, int start, int before, int count) {
-                mCrime.setNote(s.toString());
+                mParking.setNote(s.toString());
             }
             @Override
             public void afterTextChanged(Editable s) {
@@ -58,7 +72,6 @@ public class RecordingFragment extends Fragment {
 
         mDateButton = (Button) v.findViewById(R.id.parking_picture);
         mDateButton.setEnabled(false);
-
 
         return v;
     }
