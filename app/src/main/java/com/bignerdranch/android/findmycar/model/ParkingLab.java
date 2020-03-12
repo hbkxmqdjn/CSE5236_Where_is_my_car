@@ -10,6 +10,7 @@ import com.bignerdranch.android.findmycar.database.ParkingCursorWrapper;
 import com.bignerdranch.android.findmycar.database.ParkingDbSchema;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.Calendar;
@@ -35,15 +36,7 @@ public class ParkingLab {
 
     public List<Parking> getParkings() {
         List<Parking> parkings = new ArrayList<>();
-//        for (int i = 0; i < 100; i++) {
-//            Parking parking = new Parking();
-//            parking.setNote("Parking #" + i);
-//            parking.setDate(Calendar.getInstance().getTime());
-//            parkings.add(parking);
-//        }
-
         ParkingCursorWrapper cursor = queryParkings(null, null);
-
         try {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
@@ -61,12 +54,10 @@ public class ParkingLab {
                 ParkingTable.Cols.UUID + " = ?",
                 new String[] { id.toString() }
         );
-
         try {
             if (cursor.getCount() == 0) {
                 return null;
             }
-
             cursor.moveToFirst();
             return cursor.getParking();
         } finally {
@@ -75,27 +66,36 @@ public class ParkingLab {
     }
 
     public void addParking(Parking p) {
+
         ContentValues values = getContentValues(p);
-        mDatabase.insert(ParkingDbSchema.ParkingTable.NAME, null, values);
+        mDatabase.insert(ParkingTable.NAME, null, values);
+
     }
 
-    public void deleteParking(Parking p) {
-        ContentValues values = getContentValues(p);
-        mDatabase.delete(ParkingDbSchema.ParkingTable.NAME, "_id=?", new String[] { String.valueOf(p.getId())});
+//    public void deleteParking(Parking p) {
+//        ContentValues values = getContentValues(p);
+//        mDatabase.delete(ParkingDbSchema.ParkingTable.NAME, "_id=?", new String[] { String.valueOf(p.getId())});
+//    }
+
+
+    public void deleteParking(Parking c) {
+        mDatabase.delete(ParkingTable.NAME, ParkingTable.Cols.UUID + " = ?",
+                new String[]{c.getId().toString()});
     }
 
     public void updateParking(Parking parking) {
         String uuidString = parking.getId().toString();
         ContentValues values = getContentValues(parking);
 
-        mDatabase.update(ParkingDbSchema.ParkingTable.NAME, values,
+        mDatabase.update(ParkingTable.NAME, values,
                 ParkingTable.Cols.UUID + " = ?",
                 new String[] { uuidString });
+
     }
 
     private ParkingCursorWrapper queryParkings(String whereClause, String[] whereArgs) {
         Cursor cursor = mDatabase.query(
-                ParkingDbSchema.ParkingTable.NAME,
+                ParkingTable.NAME,
                 null, // columns - null selects all columns
                 whereClause,
                 whereArgs,
@@ -111,8 +111,8 @@ public class ParkingLab {
         values.put(ParkingTable.Cols.UUID, parking.getId().toString());
         values.put(ParkingTable.Cols.NOTE, parking.getNote());
         values.put(ParkingTable.Cols.DATE, parking.getDate().getTime());
-        values.put(ParkingTable.Cols.LOCATION, parking.getLocation().toString());
-
+        values.put(ParkingTable.Cols.LONGITUDE,  parking.getLongitude());
+        values.put(ParkingTable.Cols.LATITUDE,  parking.getLatitude());
         return values;
     }
 }

@@ -2,10 +2,14 @@
     <string name="app_name">Where is my car</string>
 
 
-
+    <string name="parking_time_label">Time</string>
     <string name="parking_note_hint">Take a note here.</string>
     <string name="parking_note_label">Note</string>
     <string name="parking_picture_label">Pictures</string>
     <string name="parking_picture_hint">Take pictures here.</string>
+
+    <string name="new_parking">New Parking</string>
+    <string name="delete_parking">Delete Parking</string>
+    <string name="update_parking">Update Parking</string>
 
 </resources>

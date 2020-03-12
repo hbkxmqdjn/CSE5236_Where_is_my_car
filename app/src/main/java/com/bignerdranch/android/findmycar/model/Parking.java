@@ -2,14 +2,17 @@ package com.bignerdranch.android.findmycar.model;
 
 import android.location.Location;
 
+import java.lang.reflect.Array;
 import java.util.Date;
+import java.util.Queue;
 import java.util.UUID;
 
 public class Parking {
     private UUID mId;
     private String mNote;
     private Date mDate;
-    private Location mLocation;
+    private double mLongitude;
+    private double mLatitude;
 
     public Parking() {
         this(UUID.randomUUID());
@@ -18,6 +21,9 @@ public class Parking {
     public Parking(UUID id) {
         mId = id;
         mDate = new Date();
+        mLongitude = 20.3;
+        mLatitude = 52.6;
+        mNote = "Parked here!";
     }
 
     public UUID getId() {
@@ -35,11 +41,16 @@ public class Parking {
     public void setDate (Date date) {
         mDate = date;
     }
-    public void setLocation(Location location) {
-        mLocation.setLatitude(location.getLatitude());
-        mLocation.setLongitude(location.getLongitude());
+    public void setLongitude(Double lon) {
+        mLongitude = lon;
     }
-    public Location getLocation() {
-        return mLocation;
+    public void setLatitude(Double lat) {
+        mLatitude = lat;
+    }
+    public double getLongitude() {
+        return mLongitude;
+    }
+    public double getLatitude() {
+        return mLatitude;
     }
 }

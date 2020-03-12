@@ -4,12 +4,21 @@
     android:layout_height="match_parent"
     android:layout_margin="16dp">
 
-
     <TextView
         style="?android:listSeparatorTextViewStyle"
         android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/parking_note_label"/>
+        android:layout_height="wrap_content"
+        android:text="@string/parking_time_label"/>
+    <TextView
+        android:id="@+id/parking_date"
+        style="@style/DateTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        style="?android:listSeparatorTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/parking_note_label"/>
     <EditText
         android:id="@+id/parking_note"
         android:layout_width="match_parent"

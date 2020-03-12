@@ -9,8 +9,8 @@ public class ParkingDbSchema {
             public static final String UUID = "uuid";
             public static final String NOTE = "note";
             public static final String DATE = "date";
-            public static final String LOCATION = "location";
-
+            public static final String LONGITUDE = "longitude";
+            public static final String LATITUDE = "latitude";
         }
 
     }

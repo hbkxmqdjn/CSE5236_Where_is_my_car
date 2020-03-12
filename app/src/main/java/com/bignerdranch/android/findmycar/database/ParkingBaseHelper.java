@@ -17,12 +17,14 @@ public class ParkingBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + ParkingDbSchema.ParkingTable.NAME + '(' +
+
+        db.execSQL("create table " + ParkingTable.NAME + '(' +
                 " _id integer primary key autoincrement, " +
                 ParkingTable.Cols.UUID + ", " +
                 ParkingTable.Cols.NOTE + ", " +
                 ParkingTable.Cols.DATE +  ", " +
-                ParkingTable.Cols.LOCATION + ")"
+                ParkingTable.Cols.LONGITUDE +  ", " +
+                ParkingTable.Cols.LATITUDE + ")"
         );
     }
 

@@ -10,7 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.SettingActivity" />
-        <activity android:name=".ui.ParkingActivity" />
+        <activity
+            android:name=".ui.ParkingActivity"
+            android:parentActivityName=".ui.ParkingListActivity">
+        </activity>
         <activity android:name=".ui.ParkingListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
