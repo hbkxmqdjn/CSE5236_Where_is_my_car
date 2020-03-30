@@ -1,8 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="16dp">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_margin="16dp">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id = "@+id/parking_photo"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:scaleType="centerInside"
+                android:cropToPadding="true"
+                android:background="@android:color/darker_gray"/>
+            <ImageButton
+                android:id="@+id/parking_camera"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_menu_camera"/>
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/parking_note_label"/>
+            <EditText
+                android:id="@+id/parking_note"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/parking_note_hint"/>
+
+
+
+        </LinearLayout>
+    </LinearLayout>
+
 
     <TextView
         style="?android:listSeparatorTextViewStyle"
@@ -14,25 +69,11 @@
         style="@style/DateTextViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <TextView
-        style="?android:listSeparatorTextViewStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/parking_note_label"/>
-    <EditText
-        android:id="@+id/parking_note"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/parking_note_hint"/>
+
     <TextView
         style="?android:listSeparatorTextViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/parking_picture_label"/>
 
-    <Button
-        android:id="@+id/parking_picture"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/parking_picture_hint"/>
 </LinearLayout>

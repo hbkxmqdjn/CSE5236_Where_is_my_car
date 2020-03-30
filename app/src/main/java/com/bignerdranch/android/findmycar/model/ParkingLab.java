@@ -9,6 +9,7 @@ import com.bignerdranch.android.findmycar.database.ParkingBaseHelper;
 import com.bignerdranch.android.findmycar.database.ParkingCursorWrapper;
 import com.bignerdranch.android.findmycar.database.ParkingDbSchema;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -114,5 +115,10 @@ public class ParkingLab {
         values.put(ParkingTable.Cols.LONGITUDE,  parking.getLongitude());
         values.put(ParkingTable.Cols.LATITUDE,  parking.getLatitude());
         return values;
+    }
+
+    public File getPhotoFile(Parking parking) {
+        File filesDir = mContext.getFilesDir();
+        return new File(filesDir, parking.getPhotoFilename());
     }
 }

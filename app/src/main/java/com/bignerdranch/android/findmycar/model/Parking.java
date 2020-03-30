@@ -26,6 +26,10 @@ public class Parking {
         mNote = "Parked here!";
     }
 
+    public String getPhotoFilename() {
+        return "IMG_" + getId().toString() + ".jpg";
+    }
+
     public UUID getId() {
         return mId;
     }
