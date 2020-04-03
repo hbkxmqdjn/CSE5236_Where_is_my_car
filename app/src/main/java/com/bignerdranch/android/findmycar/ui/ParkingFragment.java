@@ -20,6 +20,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -50,6 +51,7 @@ public class ParkingFragment extends Fragment {
     private EditText mTitleField;
     private TextView mDateText;
     private TextView mLocationText;
+    private Button mDirectionButton;
     private ImageButton mPhotoButton;
     private ImageView mPhotoView;
     private File mPhotoFile;
@@ -104,6 +106,16 @@ public class ParkingFragment extends Fragment {
         mTitleField = (EditText)v.findViewById(R.id.parking_note);
         mTitleField.setText(mParking.getNote());
 
+        mDirectionButton = (Button) v.findViewById(R.id.direction_button);
+        mDirectionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri gmmIntentUri = Uri.parse("google.navigation:q=" + mParking.getLatitude() + "," + mParking.getLongitude());
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
+            }
+        });
 
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
