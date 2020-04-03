@@ -1,11 +1,13 @@
 package com.bignerdranch.android.findmycar.ui;
 
-
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -23,6 +25,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -30,6 +33,8 @@ import androidx.fragment.app.FragmentManager;
 import com.bignerdranch.android.findmycar.R;
 import com.bignerdranch.android.findmycar.model.Parking;
 import com.bignerdranch.android.findmycar.model.ParkingLab;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 
 
 import java.io.File;
@@ -44,10 +49,13 @@ public class ParkingFragment extends Fragment {
     private Parking mParking;
     private EditText mTitleField;
     private TextView mDateText;
+    private TextView mLocationText;
     private ImageButton mPhotoButton;
     private ImageView mPhotoView;
     private File mPhotoFile;
     private static final int REQUEST_PHOTO= 2;
+
+    int PERMISSION_ID = 44;
 
 
     public static ParkingFragment newInstance(UUID parkingId) {
@@ -64,8 +72,11 @@ public class ParkingFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
         UUID parkingId = (UUID) getArguments().getSerializable(ARG_PARKING_ID);
         mParking = ParkingLab.get(getActivity()).getParking(parkingId);
+        mParking.setLatitude(ParkingActivity.latitude);
+        mParking.setLongitude(ParkingActivity.longitude);
         mPhotoFile = ParkingLab.get(getActivity()).getPhotoFile(mParking);
 
 //        super.onCreate(savedInstanceState);
@@ -81,8 +92,6 @@ public class ParkingFragment extends Fragment {
                 .updateParking(mParking);
     }
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -90,8 +99,11 @@ public class ParkingFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_parking, container, false);
         mDateText = (TextView)v.findViewById(R.id.parking_date);
         mDateText.setText(mParking.getDate().toString());
+        mLocationText = (TextView)v.findViewById(R.id.location_text);
+        mLocationText.setText("Latitude: " + mParking.getLatitude() + ", Longitude: " + mParking.getLongitude());
         mTitleField = (EditText)v.findViewById(R.id.parking_note);
         mTitleField.setText(mParking.getNote());
+
 
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override

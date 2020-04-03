@@ -112,8 +112,8 @@ public class ParkingLab {
         values.put(ParkingTable.Cols.UUID, parking.getId().toString());
         values.put(ParkingTable.Cols.NOTE, parking.getNote());
         values.put(ParkingTable.Cols.DATE, parking.getDate().getTime());
-        values.put(ParkingTable.Cols.LONGITUDE,  parking.getLongitude());
-        values.put(ParkingTable.Cols.LATITUDE,  parking.getLatitude());
+        values.put(ParkingTable.Cols.LONGITUDE, parking.getLongitude());
+        values.put(ParkingTable.Cols.LATITUDE, parking.getLatitude());
         return values;
     }
 

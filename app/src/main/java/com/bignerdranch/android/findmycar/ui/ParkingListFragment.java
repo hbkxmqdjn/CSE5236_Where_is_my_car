@@ -44,6 +44,7 @@ public class ParkingListFragment extends Fragment {
         return view;
     }
 
+    // UI is not completely working yet
     private void updateUI() {
         ParkingLab parkingLab = ParkingLab.get(getActivity());
         List<Parking> parkings = parkingLab.getParkings();
