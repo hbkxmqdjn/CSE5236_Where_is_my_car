@@ -18,7 +18,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
-            android:text="login_title"
+            android:text="Please login or register"
             android:textAlignment="center"
             android:textSize="24sp"/>
 
