@@ -87,11 +87,6 @@
         android:layout_height="wrap_content"
         android:text="Direction" />
 
-    <TextView
-        style="?android:listSeparatorTextViewStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/parking_picture_label"/>
 
 
 </LinearLayout>

@@ -7,6 +7,8 @@
     <string name="parking_picture_label">Pictures</string>
     <string name="parking_picture_hint">Take pictures here.</string>
     <string name="location_label">Location</string>
+    <string name="no_GPS_toast">Location service unavailable.\n Location cannot be recorded.</string>
+    <string name="cannot_direct_toast">Network unavailable.\n Direction might fail.</string>
 
     <string name="new_parking">New Parking</string>
     <string name="delete_parking">Delete Parking</string>

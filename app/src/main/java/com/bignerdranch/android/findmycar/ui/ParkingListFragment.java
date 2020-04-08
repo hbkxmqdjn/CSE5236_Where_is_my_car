@@ -1,6 +1,10 @@
 package com.bignerdranch.android.findmycar.ui;
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,6 +23,8 @@ import com.bignerdranch.android.findmycar.R;
 import com.bignerdranch.android.findmycar.model.Parking;
 import com.bignerdranch.android.findmycar.model.ParkingLab;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.List;
 
 public class ParkingListFragment extends Fragment {
@@ -131,6 +137,11 @@ public class ParkingListFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.new_parking:
+                if(!isGPSAvailable()){
+                    Toast.makeText(this.getActivity(), R.string.no_GPS_toast, Toast.LENGTH_SHORT)
+                            .show();
+                }
+
                 Parking parking = new Parking();
                 ParkingLab.get(getActivity()).addParking(parking);
                 Intent intent = ParkingActivity
@@ -140,5 +151,17 @@ public class ParkingListFragment extends Fragment {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+
+    private boolean isGPSAvailable() {
+        LocationManager lm = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
+        boolean gps_enabled = false;
+
+        try {
+            gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        } catch(Exception ex) {}
+
+        return gps_enabled;
     }
 }
