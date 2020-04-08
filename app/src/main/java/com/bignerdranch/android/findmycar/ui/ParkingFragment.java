@@ -2,7 +2,9 @@ package com.bignerdranch.android.findmycar.ui;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -14,6 +16,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -115,13 +118,25 @@ public class ParkingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(!isNetworkAvailable()){
-                    Toast.makeText(getActivity(), R.string.cannot_direct_toast, Toast.LENGTH_SHORT)
+//                    Toast.makeText(getActivity(), R.string.cannot_direct_toast, Toast.LENGTH_SHORT)
+//                            .show();
+
+                    new AlertDialog.Builder(getActivity())
+                            .setMessage(R.string.gps_network_not_enabled)
+                            .setPositiveButton(R.string.open_network_settings, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                                    getActivity().startActivity(new Intent(Settings.ACTION_DATA_USAGE_SETTINGS));
+                                }
+                            })
+                            .setNegativeButton(R.string.Cancel,null)
                             .show();
+                }else {
+                    Uri gmmIntentUri = Uri.parse("google.navigation:q=" + mParking.getLatitude() + "," + mParking.getLongitude());
+                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                    mapIntent.setPackage("com.google.android.apps.maps");
+                    startActivity(mapIntent);
                 }
-                Uri gmmIntentUri = Uri.parse("google.navigation:q=" + mParking.getLatitude() + "," + mParking.getLongitude());
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                mapIntent.setPackage("com.google.android.apps.maps");
-                startActivity(mapIntent);
             }
         });
 
@@ -243,6 +258,7 @@ public class ParkingFragment extends Fragment {
         if (networkInfo != null && networkInfo.isConnected()) {
             return true;
         } else {
+
             return false;
         }
     }

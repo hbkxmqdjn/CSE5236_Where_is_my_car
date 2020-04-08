@@ -137,10 +137,10 @@ public class ParkingListFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.new_parking:
-                if(!isGPSAvailable()){
-                    Toast.makeText(this.getActivity(), R.string.no_GPS_toast, Toast.LENGTH_SHORT)
-                            .show();
-                }
+//                if(!isGPSAvailable()){
+//                    Toast.makeText(this.getActivity(), R.string.no_GPS_toast, Toast.LENGTH_SHORT)
+//                            .show();
+//                }
 
                 Parking parking = new Parking();
                 ParkingLab.get(getActivity()).addParking(parking);
