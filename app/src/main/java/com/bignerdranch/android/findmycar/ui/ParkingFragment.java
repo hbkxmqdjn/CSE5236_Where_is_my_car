@@ -122,7 +122,7 @@ public class ParkingFragment extends Fragment {
 //                            .show();
 
                     new AlertDialog.Builder(getActivity())
-                            .setMessage(R.string.gps_network_not_enabled)
+                            .setMessage(R.string.network_not_enabled)
                             .setPositiveButton(R.string.open_network_settings, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface paramDialogInterface, int paramInt) {

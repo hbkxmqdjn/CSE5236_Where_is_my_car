@@ -2,7 +2,9 @@ package com.bignerdranch.android.findmycar.ui;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -42,6 +44,7 @@ public class ParkingActivity extends SingleFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_fragment);
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -67,9 +70,20 @@ public class ParkingActivity extends SingleFragmentActivity {
                         }
                 );
             } else {
-                Toast.makeText(this, "Turn on location", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                startActivity(intent);
+//                Toast.makeText(this, "Turn on location", Toast.LENGTH_LONG).show();
+//                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+//                startActivity(intent);
+                new AlertDialog.Builder(this)
+                        .setMessage(R.string.gps_not_enabled)
+                        .setPositiveButton(R.string.open_gps_settings, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                                startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                            }
+                        })
+                        .setNegativeButton(R.string.Cancel,null)
+                        .show();
+
             }
         } else {
             requestPermissions();

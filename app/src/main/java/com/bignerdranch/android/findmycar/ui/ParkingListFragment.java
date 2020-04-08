@@ -137,10 +137,6 @@ public class ParkingListFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.new_parking:
-//                if(!isGPSAvailable()){
-//                    Toast.makeText(this.getActivity(), R.string.no_GPS_toast, Toast.LENGTH_SHORT)
-//                            .show();
-//                }
 
                 Parking parking = new Parking();
                 ParkingLab.get(getActivity()).addParking(parking);
@@ -154,14 +150,4 @@ public class ParkingListFragment extends Fragment {
     }
 
 
-    private boolean isGPSAvailable() {
-        LocationManager lm = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
-        boolean gps_enabled = false;
-
-        try {
-            gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        } catch(Exception ex) {}
-
-        return gps_enabled;
-    }
 }
