@@ -88,7 +88,7 @@
             android:layout_marginBottom="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:text="new_user"/>
+            android:text="New user"/>
 
     </LinearLayout>
 

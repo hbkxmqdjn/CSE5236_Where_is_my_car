@@ -37,12 +37,12 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
         View v = inflater.inflate(R.layout.fragment_account, container, false);
 
         Activity activity = getActivity();
-        if (activity != null){
+        if (activity != null) {
             int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
 
-            mEtUsername = v.findViewById(R.id.username);
-            mEtPassword = v.findViewById(R.id.password);
-            mEtConfirm = v.findViewById(R.id.password_confirm);
+            mEtUsername = v.findViewById(R.id.account_username);
+            mEtPassword = v.findViewById(R.id.account_password);
+            mEtConfirm = v.findViewById(R.id.account_password_confirm);
             Button btnAdd = v.findViewById(R.id.done_button);
             btnAdd.setOnClickListener(this);
             Button btnCancel = v.findViewById(R.id.cancel_button);
@@ -50,8 +50,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
             Button btnExit = v.findViewById(R.id.exit_button);
             if (rotation == Surface.ROTATION_0 || rotation == Surface.ROTATION_180) {
                 btnExit.setOnClickListener(this);
-            }
-            else {
+            } else {
                 btnExit.setVisibility(View.GONE);
             }
         }
@@ -70,8 +69,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                     actionBar.setSubtitle(getResources().getString(R.string.account));
                 }
             }
-        }
-        catch (NullPointerException npe) {
+        } catch (NullPointerException npe) {
 
         }
     }
@@ -107,14 +105,40 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
         String password = mEtPassword.getText().toString();
         String confirm = mEtConfirm.getText().toString();
         if (activity != null) {
-            if (password.equals(confirm) && !username.equals("") && !password.equals("")) {
+            if (password.length() < 6 || !checkString(password)) {
+                Toast.makeText(activity.getApplicationContext(), "Password has to: \n- be longer than 6 digits \n- contain at least 1 uppercase letter " +
+                       "\n- contain at least 1 lowercase letter \n- contain at least 1 number", Toast.LENGTH_SHORT).show();
+            } else if (!password.equals(confirm)) {
+                Toast.makeText(activity.getApplicationContext(), "Password does not match confirm password", Toast.LENGTH_SHORT).show();
+            } else if ((username.equals("")) || (password.equals("")) || (confirm.equals(""))) {
+                Toast.makeText(activity.getApplicationContext(), "Missing entry", Toast.LENGTH_SHORT).show();
+            } else {
                 AccountSingleton singleton = AccountSingleton.get(activity.getApplicationContext());
                 Account account = new Account(username, password);
                 singleton.addAccount(account);
                 Toast.makeText(activity.getApplicationContext(), "New record inserted", Toast.LENGTH_SHORT).show();
-            } else if ((username.equals("")) || (password.equals("")) || (confirm.equals(""))) {
-                Toast.makeText(activity.getApplicationContext(), "Missing entry", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+
+    private static boolean checkString(String str) {
+        char ch;
+        boolean capitalFlag = false;
+        boolean lowerCaseFlag = false;
+        boolean numberFlag = false;
+        for (int i = 0; i < str.length(); i++) {
+            ch = str.charAt(i);
+            if (Character.isDigit(ch)) {
+                numberFlag = true;
+            } else if (Character.isUpperCase(ch)) {
+                capitalFlag = true;
+            } else if (Character.isLowerCase(ch)) {
+                lowerCaseFlag = true;
+            }
+            if (numberFlag && capitalFlag && lowerCaseFlag)
+                return true;
+        }
+        return false;
     }
 }
