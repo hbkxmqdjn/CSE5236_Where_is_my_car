@@ -86,6 +86,7 @@ public class ParkingFragment extends Fragment {
         mParking = ParkingLab.get(getActivity()).getParking(parkingId);
         mParking.setLatitude(ParkingActivity.latitude);
         mParking.setLongitude(ParkingActivity.longitude);
+        mParking.setUsername(ParkingListFragment.USERNAME);
         mPhotoFile = ParkingLab.get(getActivity()).getPhotoFile(mParking);
 
 //        super.onCreate(savedInstanceState);

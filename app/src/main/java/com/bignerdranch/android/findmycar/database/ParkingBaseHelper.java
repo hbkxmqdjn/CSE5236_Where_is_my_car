@@ -24,7 +24,8 @@ public class ParkingBaseHelper extends SQLiteOpenHelper {
                 ParkingTable.Cols.NOTE + ", " +
                 ParkingTable.Cols.DATE +  ", " +
                 ParkingTable.Cols.LONGITUDE +  ", " +
-                ParkingTable.Cols.LATITUDE + ")"
+                ParkingTable.Cols.LATITUDE +  ", " +
+                ParkingTable.Cols.USERNAME + ")"
         );
     }
 

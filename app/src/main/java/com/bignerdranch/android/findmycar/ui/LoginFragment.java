@@ -30,7 +30,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private AccountSingleton mAccountSingleton;
     private AccountDbHelper mDbHelper;
 
-    private final static String OPT_NAME = "name";
+    public final static String OPT_NAME = "name";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,6 +68,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         return v;
     }
 
+
     private void checkLogin() {
         String username = mUsernameEditText.getText().toString();
         String password = mPasswordEditText.getText().toString();
@@ -97,10 +98,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
             if (accountList.size() > 0 && hasMatchingAccount) {
                 // Save username as the name of the player
-                SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+                SharedPreferences settings = getActivity().getSharedPreferences(OPT_NAME, getActivity().MODE_PRIVATE);
                 SharedPreferences.Editor editor = settings.edit();
-                editor.putString(OPT_NAME, username);
-                editor.apply();
+                editor.putString("stored_username", username);
+                editor.commit();
 
                 // Bring up the parkinglist screen
                 startActivity(new Intent(getActivity(), ParkingListActivity.class));

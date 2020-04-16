@@ -21,12 +21,14 @@ public class ParkingCursorWrapper extends CursorWrapper {
         long date = getLong(getColumnIndex(ParkingTable.Cols.DATE));
         double latitude = getDouble(getColumnIndex(ParkingTable.Cols.LATITUDE));
         double longitude = getDouble(getColumnIndex(ParkingTable.Cols.LONGITUDE));
+        String username = getString(getColumnIndex(ParkingTable.Cols.USERNAME));
 
         Parking parking = new Parking(UUID.fromString(uuidString));
         parking.setNote(note);
         parking.setDate(new Date(date));
         parking.setLatitude(latitude);
         parking.setLongitude(longitude);
+        parking.setUsername(username);
 
         return parking;
     }

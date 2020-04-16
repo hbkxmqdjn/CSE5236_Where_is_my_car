@@ -22,10 +22,13 @@ import com.bignerdranch.android.findmycar.R;
 import com.bignerdranch.android.findmycar.model.Account;
 import com.bignerdranch.android.findmycar.model.AccountSingleton;
 
+import java.util.List;
+
 public class AccountFragment extends Fragment implements View.OnClickListener {
     private EditText mEtUsername;
     private EditText mEtPassword;
     private EditText mEtConfirm;
+    private AccountSingleton mAccountSingleton;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -105,7 +108,10 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
         String password = mEtPassword.getText().toString();
         String confirm = mEtConfirm.getText().toString();
         if (activity != null) {
-            if (password.length() < 6 || !checkString(password)) {
+            if(findUsername(username)){
+                Toast.makeText(activity.getApplicationContext(), "Username already exists", Toast.LENGTH_SHORT).show();
+            }
+            else if (password.length() < 6 || !checkString(password)) {
                 Toast.makeText(activity.getApplicationContext(), "Password has to: \n- be longer than 6 digits \n- contain at least 1 uppercase letter " +
                        "\n- contain at least 1 lowercase letter \n- contain at least 1 number", Toast.LENGTH_SHORT).show();
             } else if (!password.equals(confirm)) {
@@ -140,5 +146,22 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                 return true;
         }
         return false;
+    }
+
+    public boolean findUsername(String username){
+        if (mAccountSingleton == null) {
+            if (getActivity() != null) {
+                mAccountSingleton = AccountSingleton.get(getActivity().getApplicationContext());
+            }
+        }
+        boolean foundUsername = false;
+        List<Account> accountList = mAccountSingleton.getAccounts();
+        for (Account account : accountList) {
+            if (account.getName().equals(username)) {
+                foundUsername = true;
+                break;
+            }
+        }
+        return foundUsername;
     }
 }

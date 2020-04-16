@@ -2,6 +2,7 @@ package com.bignerdranch.android.findmycar.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -31,12 +32,16 @@ public class ParkingListFragment extends Fragment {
 
     private RecyclerView mParkingRecyclerView;
     private ParkingAdapter mAdapter;
+    public static String USERNAME;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        SharedPreferences settings = getActivity().getSharedPreferences(LoginFragment.OPT_NAME, Context.MODE_PRIVATE);
+        USERNAME = settings.getString("stored_username", "defaultValue");
+
     }
 
     @Override
@@ -53,7 +58,7 @@ public class ParkingListFragment extends Fragment {
     // UI is not completely working yet
     private void updateUI() {
         ParkingLab parkingLab = ParkingLab.get(getActivity());
-        List<Parking> parkings = parkingLab.getParkings();
+        List<Parking> parkings = parkingLab.getParkings(USERNAME);
         if (mAdapter == null) {
             mAdapter = new ParkingAdapter(parkings);
             mParkingRecyclerView.setAdapter(mAdapter);
@@ -137,7 +142,7 @@ public class ParkingListFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.new_parking:
-
+                Toast.makeText(getActivity().getApplicationContext(), USERNAME, Toast.LENGTH_SHORT).show();
                 Parking parking = new Parking();
                 ParkingLab.get(getActivity()).addParking(parking);
                 Intent intent = ParkingActivity

@@ -35,13 +35,16 @@ public class ParkingLab {
                 .getWritableDatabase();
     }
 
-    public List<Parking> getParkings() {
+    public List<Parking> getParkings(String username) {
         List<Parking> parkings = new ArrayList<>();
         ParkingCursorWrapper cursor = queryParkings(null, null);
         try {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                parkings.add(cursor.getParking());
+                Parking p = cursor.getParking();
+                if(p.getUsernamee().equals(username)){
+                    parkings.add(p);
+                }
                 cursor.moveToNext();
             }
         } finally {
@@ -114,6 +117,7 @@ public class ParkingLab {
         values.put(ParkingTable.Cols.DATE, parking.getDate().getTime());
         values.put(ParkingTable.Cols.LONGITUDE, parking.getLongitude());
         values.put(ParkingTable.Cols.LATITUDE, parking.getLatitude());
+        values.put(ParkingTable.Cols.USERNAME, parking.getUsernamee());
         return values;
     }
 

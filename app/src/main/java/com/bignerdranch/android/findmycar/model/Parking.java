@@ -13,6 +13,7 @@ public class Parking {
     private Date mDate;
     private double mLongitude;
     private double mLatitude;
+    private String mUsername;
 
     public Parking() {
         this(UUID.randomUUID());
@@ -24,6 +25,7 @@ public class Parking {
         mLongitude = 20.3;
         mLatitude = 52.6;
         mNote = "Parked here!";
+        mUsername = "";
     }
 
     public String getPhotoFilename() {
@@ -56,5 +58,12 @@ public class Parking {
     }
     public double getLatitude() {
         return mLatitude;
+    }
+
+    public String getUsernamee() {
+        return mUsername;
+    }
+    public void setUsername(String Username) {
+        mUsername = Username;
     }
 }
