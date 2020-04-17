@@ -15,6 +15,7 @@ import com.bignerdranch.android.findmycar.R;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +24,6 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.longClick;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
@@ -43,7 +43,7 @@ public class ParkingActivityTest {
     public ActivityTestRule<LoginActivity> mActivityTestRule = new ActivityTestRule<>(LoginActivity.class);
 
     @Test
-    public void parkingActivityTest() {
+    public void parkingActivityTest2() {
 
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.new_user_button), withText("New user"),
@@ -124,6 +124,8 @@ public class ParkingActivityTest {
                                 4)));
         appCompatEditText5.perform(scrollTo(), replaceText("Abc123"), closeSoftKeyboard());
 
+        pressBack();
+
         ViewInteraction appCompatButton4 = onView(
                 allOf(withId(R.id.login_button), withText("login"),
                         childAtPosition(
@@ -132,6 +134,16 @@ public class ParkingActivityTest {
                                         0),
                                 5)));
         appCompatButton4.perform(scrollTo(), click());
+
+        ViewInteraction textView = onView(
+                allOf(withId(R.id.new_parking), withContentDescription("New Parking"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.action_bar),
+                                        1),
+                                0),
+                        isDisplayed()));
+        textView.check(matches(isDisplayed()));
 
         ViewInteraction actionMenuItemView = onView(
                 allOf(withId(R.id.new_parking), withContentDescription("New Parking"),
@@ -143,6 +155,46 @@ public class ParkingActivityTest {
                         isDisplayed()));
         actionMenuItemView.perform(click());
 
+        ViewInteraction textView2 = onView(
+                allOf(withId(R.id.update_button), withContentDescription("Update Parking"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.action_bar),
+                                        2),
+                                0),
+                        isDisplayed()));
+        textView2.check(matches(isDisplayed()));
+
+        ViewInteraction textView3 = onView(
+                allOf(withId(R.id.delete_button), withContentDescription("Delete Parking"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.action_bar),
+                                        2),
+                                1),
+                        isDisplayed()));
+        textView3.check(matches(isDisplayed()));
+
+        ViewInteraction imageButton = onView(
+                allOf(withId(R.id.parking_camera),
+                        childAtPosition(
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                        0),
+                                1),
+                        isDisplayed()));
+        imageButton.check(matches(isDisplayed()));
+
+        ViewInteraction button = onView(
+                allOf(withId(R.id.direction_button),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.fragment_container),
+                                        0),
+                                5),
+                        isDisplayed()));
+        button.check(matches(isDisplayed()));
+
         ViewInteraction actionMenuItemView2 = onView(
                 allOf(withId(R.id.update_button), withContentDescription("Update Parking"),
                         childAtPosition(
@@ -153,6 +205,16 @@ public class ParkingActivityTest {
                         isDisplayed()));
         actionMenuItemView2.perform(click());
 
+        ViewInteraction textView4 = onView(
+                allOf(withId(R.id.parking_note), withText("Parked here!"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.parking_recycler_view),
+                                        0),
+                                0),
+                        isDisplayed()));
+        textView4.check(matches(withText("Parked here!")));
+
         ViewInteraction linearLayout = onView(
                 allOf(childAtPosition(
                         allOf(withId(R.id.parking_recycler_view),
@@ -162,26 +224,6 @@ public class ParkingActivityTest {
                         0),
                         isDisplayed()));
         linearLayout.check(matches(isDisplayed()));
-
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.parking_note), withText("Parked here!"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.parking_recycler_view),
-                                        0),
-                                0),
-                        isDisplayed()));
-        textView.check(matches(withText("Parked here!")));
-
-        ViewInteraction textView2 = onView(
-                allOf(withId(R.id.parking_note), withText("Parked here!"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.parking_recycler_view),
-                                        0),
-                                0),
-                        isDisplayed()));
-        textView2.check(matches(withText("Parked here!")));
 
         ViewInteraction actionMenuItemView3 = onView(
                 allOf(withId(R.id.new_parking), withContentDescription("New Parking"),
@@ -211,10 +253,10 @@ public class ParkingActivityTest {
                                         1),
                                 1),
                         isDisplayed()));
-        appCompatEditText7.perform(replaceText("Parked here!2"));
+        appCompatEditText7.perform(replaceText("Parked here2"));
 
         ViewInteraction appCompatEditText8 = onView(
-                allOf(withId(R.id.parking_note), withText("Parked here!2"),
+                allOf(withId(R.id.parking_note), withText("Parked here2"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.LinearLayout")),
@@ -233,6 +275,16 @@ public class ParkingActivityTest {
                         isDisplayed()));
         actionMenuItemView4.perform(click());
 
+        ViewInteraction textView5 = onView(
+                allOf(withId(R.id.parking_note), withText("Parked here2"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.parking_recycler_view),
+                                        1),
+                                0),
+                        isDisplayed()));
+        textView5.check(matches(withText("Parked here2")));
+
         ViewInteraction linearLayout2 = onView(
                 allOf(childAtPosition(
                         allOf(withId(R.id.parking_recycler_view),
@@ -243,126 +295,35 @@ public class ParkingActivityTest {
                         isDisplayed()));
         linearLayout2.check(matches(isDisplayed()));
 
-        ViewInteraction textView3 = onView(
-                allOf(withId(R.id.parking_note), withText("Parked here!2"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.parking_recycler_view),
-                                        1),
-                                0),
-                        isDisplayed()));
-        textView3.check(matches(withText("Parked here!2")));
-
         ViewInteraction linearLayout3 = onView(
                 allOf(childAtPosition(
                         allOf(withId(R.id.parking_recycler_view),
                                 childAtPosition(
                                         withId(R.id.fragment_container),
                                         1)),
-                        0),
+                        1),
                         isDisplayed()));
         linearLayout3.perform(click());
 
-        ViewInteraction appCompatEditText9 = onView(
-                allOf(withId(R.id.parking_note), withText("Parked here!"),
+        ViewInteraction editText = onView(
+                allOf(withId(R.id.parking_note), withText("Parked here2"),
                         childAtPosition(
                                 childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
+                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
                                         1),
                                 1),
                         isDisplayed()));
-        appCompatEditText9.perform(click());
+        editText.check(matches(withText("Parked here2")));
 
-        ViewInteraction appCompatEditText10 = onView(
-                allOf(withId(R.id.parking_note), withText("Parked here!"),
+        ViewInteraction appCompatImageButton = onView(
+                allOf(withId(R.id.parking_camera),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.LinearLayout")),
-                                        1),
-                                1),
-                        isDisplayed()));
-        appCompatEditText10.perform(longClick());
-
-        ViewInteraction appCompatEditText11 = onView(
-                allOf(withId(R.id.parking_note), withText("Parked here!"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        1),
-                                1),
-                        isDisplayed()));
-        appCompatEditText11.perform(click());
-
-        ViewInteraction appCompatEditText12 = onView(
-                allOf(withId(R.id.parking_note), withText("Parked here!"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        1),
-                                1),
-                        isDisplayed()));
-        appCompatEditText12.perform(click());
-
-        ViewInteraction appCompatEditText13 = onView(
-                allOf(withId(R.id.parking_note), withText("Parked here!"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        1),
-                                1),
-                        isDisplayed()));
-        appCompatEditText13.perform(click());
-
-        ViewInteraction appCompatEditText14 = onView(
-                allOf(withId(R.id.parking_note), withText("Parked here!"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        1),
-                                1),
-                        isDisplayed()));
-        appCompatEditText14.perform(replaceText("Parked"));
-
-        ViewInteraction appCompatEditText15 = onView(
-                allOf(withId(R.id.parking_note), withText("Parked"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        1),
-                                1),
-                        isDisplayed()));
-        appCompatEditText15.perform(closeSoftKeyboard());
-
-        ViewInteraction actionMenuItemView5 = onView(
-                allOf(withId(R.id.update_button), withContentDescription("Update Parking"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.action_bar),
-                                        2),
-                                0),
-                        isDisplayed()));
-        actionMenuItemView5.perform(click());
-
-        ViewInteraction linearLayout4 = onView(
-                allOf(childAtPosition(
-                        allOf(withId(R.id.parking_recycler_view),
-                                childAtPosition(
-                                        withId(R.id.fragment_container),
-                                        0)),
-                        0),
-                        isDisplayed()));
-        linearLayout4.check(matches(isDisplayed()));
-
-        ViewInteraction textView5 = onView(
-                allOf(withId(R.id.parking_note), withText("Parked"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.parking_recycler_view),
                                         0),
-                                0),
+                                1),
                         isDisplayed()));
-        textView5.check(matches(withText("Parked")));
-
+        appCompatImageButton.perform(click());
     }
 
     private static Matcher<View> childAtPosition(
