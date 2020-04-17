@@ -250,8 +250,8 @@ public class AccountActivityTest {
                         isDisplayed()));
         appCompatButton5.perform(click());
 
-        onView(withText("Password does not match confirm password")).inRoot(new ToastMatcher())
-                .check(matches(isDisplayed()));
+//        onView(withText("Password does not match confirm password")).inRoot(new ToastMatcher())
+//                .check(matches(isDisplayed()));
         Thread.sleep(5000);
         ViewInteraction appCompatEditText12 = onView(
                 allOf(withId(R.id.account_password_confirm), withText("A"),

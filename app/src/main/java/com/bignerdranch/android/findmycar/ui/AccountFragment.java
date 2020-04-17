@@ -108,16 +108,15 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
         String password = mEtPassword.getText().toString();
         String confirm = mEtConfirm.getText().toString();
         if (activity != null) {
-            if(findUsername(username)){
-                Toast.makeText(activity.getApplicationContext(), "Username already exists", Toast.LENGTH_SHORT).show();
-            }
-            else if (password.length() < 6 || !checkString(password)) {
+            if (password.length() < 6 || !checkString(password)) {
                 Toast.makeText(activity.getApplicationContext(), "Password has to: \n- be longer than 6 digits \n- contain at least 1 uppercase letter " +
                        "\n- contain at least 1 lowercase letter \n- contain at least 1 number", Toast.LENGTH_SHORT).show();
             } else if (!password.equals(confirm)) {
                 Toast.makeText(activity.getApplicationContext(), "Password does not match confirm password", Toast.LENGTH_SHORT).show();
             } else if ((username.equals("")) || (password.equals("")) || (confirm.equals(""))) {
                 Toast.makeText(activity.getApplicationContext(), "Missing entry", Toast.LENGTH_SHORT).show();
+            } else if(findUsername(username)){
+                Toast.makeText(activity.getApplicationContext(), "Username already exists", Toast.LENGTH_SHORT).show();
             } else {
                 AccountSingleton singleton = AccountSingleton.get(activity.getApplicationContext());
                 Account account = new Account(username, password);
